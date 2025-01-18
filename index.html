@@ -1,13 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin: 10px 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lab 2</h1>
+    <ul id="itemList"></ul>
+    <button id="deleteAll">Delete All</button>
+    <button id="deleteOne">Delete One</button>
+
+    <script>
+        // Sample array of items
+        const items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+
+        // Function to generate a random color
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Function to render the list
+        function renderList() {
+            const list = document.getElementById("itemList");
+            list.innerHTML = ""; // Clear existing items
+            items.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                li.style.backgroundColor = getRandomColor();
+                list.appendChild(li);
+            });
+        }
+
+        // Event listener for "Delete All" button
+        document.getElementById("deleteAll").addEventListener("click", () => {
+            const list = document.getElementById("itemList");
+            list.innerHTML = ""; // Clear all items
+            document.getElementById("deleteAll").textContent = "No items";
+        });
+
+        // Event listener for "Delete One" button
+        document.getElementById("deleteOne").addEventListener("click", () => {
+            const list = document.getElementById("itemList");
+            if (list.firstChild) {
+                list.removeChild(list.firstChild); // Remove the first item
+            }
+        });
+
+        // Initial rendering of the list
+        renderList();
+    </script>
+</body>
 </html>
